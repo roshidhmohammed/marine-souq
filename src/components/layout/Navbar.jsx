@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import useStore from '../../store/useStore';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -75,8 +75,8 @@ export default function Navbar() {
           </div>
 
           {/* Right Area */}
-          <div className="ml-auto flex flex-shrink-0 items-center justify-end gap-2 md:gap-3 pointer-events-auto">
-            <NavbarSearch className="hidden sm:flex lg:hidden items-center" inputClassName="min-w-[8rem] md:min-w-[10rem]" />
+          <div className="ml-auto flex items-center justify-end gap-2 md:gap-3 pointer-events-auto">
+            <NavbarSearch className="hidden md:flex lg:hidden items-center" inputClassName="min-w-[8rem] md:min-w-[10rem]" />
             <NavbarActions cartCount={cartCount} />
 
             {/* Mobile Menu Button */}
@@ -109,13 +109,27 @@ export default function Navbar() {
               transition={{ type: 'tween', duration: 0.3 }}
               className="fixed top-0 left-0 w-[280px] h-screen bg-white shadow-2xl z-50 lg:hidden flex flex-col pointer-events-auto"
             >
-              <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-white">
+              <div className="p-5 border-b border-gray-100 bg-white">
+              <div className="flex items-center justify-between gap-3">
                 <span className="font-poppins font-bold text-xl text-ocean-blue tracking-tight">Marine <span className="text-fresh-green">Souq</span></span>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="text-gray-500 hover:text-red-500 bg-gray-50 p-2 rounded-lg">
                   <X size={20} />
                 </button>
               </div>
-              
+
+              <Link
+                to="/account"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="mt-4 flex items-center gap-3 rounded-[18px] bg-blue-50 px-4 py-3 text-gray-700 transition hover:bg-blue-100"
+              >
+                <User size={18} className="text-ocean-blue" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Profile</p>
+                  <p className="text-xs text-slate-500">Manage account</p>
+                </div>
+              </Link>
+            </div>
+            
               <div className="flex-1 overflow-y-auto py-5">
                 <ul className="space-y-2 px-4">
                   <li>

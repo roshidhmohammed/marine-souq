@@ -75,16 +75,16 @@ export default function NavbarActions({ cartCount }) {
       <Link
         to="/account"
         aria-label="Profile"
-        className="rounded-[14px] p-3 text-gray-600 transition hover:bg-gray-100 hover:text-ocean-blue"
+        className="hidden sm:inline-flex rounded-[14px] p-3 text-gray-600 transition hover:bg-gray-100 hover:text-ocean-blue"
       >
         <User size={18} />
       </Link>
 
       <Link
         to="/cart"
-        className="flex items-center gap-2 rounded-[18px] bg-[#22c55e] px-4 py-3 text-sm font-bold text-black transition hover:bg-[#16a34a]"
+        className="flex items-center gap-2 rounded-[18px] bg-[#22c55e] px-3 py-2.5 sm:px-4 sm:py-3 text-sm font-bold text-black transition hover:bg-[#16a34a]"
       >
-        <span className="pt-0.5 whitespace-nowrap">Cart</span>
+        <span className="hidden sm:inline pt-0.5 whitespace-nowrap">Cart</span>
         <ShoppingCart size={16} className="text-black/80" />
         {cartCount > 0 && (
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black text-[10px] font-bold text-white">
