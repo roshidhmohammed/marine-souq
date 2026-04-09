@@ -38,6 +38,7 @@ export function SmoothScrollShell({ children }) {
   const shouldReduceMotion = useReducedMotion();
   const contentRef = useRef(null);
   const [contentHeight, setContentHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
   const smoothScrollY = useSpring(scrollY, scrollShellSpringOptions);
   const y = useTransform(smoothScrollY, (value) => -value);
@@ -73,7 +74,20 @@ export function SmoothScrollShell({ children }) {
     };
   }, [shouldReduceMotion]);
 
-  if (shouldReduceMotion) {
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    };
+
+    updateIsMobile();
+    window.addEventListener('resize', updateIsMobile);
+
+    return () => {
+      window.removeEventListener('resize', updateIsMobile);
+    };
+  }, []);
+
+  if (shouldReduceMotion || isMobile) {
     return <div className="relative">{children}</div>;
   }
 
